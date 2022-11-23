@@ -1,0 +1,37 @@
+package com.arghamnegargroup.core.features.core.data.remote
+
+object Endpoints {
+    const val GET_DOCUMENT_INFO = "GetDocumentInfo"
+    const val GET_ALL_STOCKS = "GetAllStock"
+    const val GET_ALL_SUPPLIERS = "GetSuppliers"
+    const val GET_ITEM_INFO = "GetItemInfo"
+    const val BOOK_STOCK_DOCUMENT = "BookStockDocument"
+    const val GET_STORES = "GetStores"
+    const val SAVE_BARCODE_FILE = "SaveBarcodeFile"
+    const val GET_USER = "GetUser"
+    const val GET_STOCK_SECTION = "GetStockSection"
+    const val GET_STOCK_SECTIONS = "GetStockSections"
+    const val ITEM_ASSIGNMENT_TO_SECTION = "ItemAssignmentToSection"
+    const val GET_ITEM_BARCODES = "GetItemBarcodes"
+    const val SEARCH_ITEM = "SearchItem"
+    const val SAVE_ITEM_INFO = "SaveItemInfo"
+    const val GET_DICTIONARY = "GetDictionary"
+    const val GET_QUICK_ITEMS = "GetQuickItems"
+    const val GET_TABLES = "GetTables"
+    const val GET_CUSTOMER_BY_CODE = "GetCustomerByCode"
+    const val SAVE_CUSTOMER = "SaveCustomer"
+    const val SUSPEND_ORDER = "SuspendOrder"
+    const val GET_SUSPEND_ORDERS = "GetSuspendorders"
+    const val RESUME_SUSPEND_ORDERS = "ResumeSuspendOrder"
+    const val SAVE_SALE_INVOICE = "SaveSaleInvoiceByOrder"
+    const val CALC_INVOICE = "CalcInvoice"
+    const val GET_ITEMS = "GetItems"
+    const val GET_INVOICE_BY_INVOICE_NUMBER = "GetInvoiceByInvoiceNumber"
+    const val SAVE_RETURN_INVOICE = "SaveReturnInvoice"
+    const val GET_CUSTOMER_CREDIT = "GetCustomerCredit"
+    const val USE_CUSTOMER_CREDIT = "UseCustomerCredit"
+    const val USE_REMAIN_CREDIT = "UseRemainCredit"
+    const val GET_REASONS = "GetReasons"
+
+
+}
