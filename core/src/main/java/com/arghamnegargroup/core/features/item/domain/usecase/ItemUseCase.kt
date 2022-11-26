@@ -6,4 +6,5 @@ data class ItemUseCase(
     val search: Search,
     val getItemBarcode: GetItemBarcode,
     val saveItemBarcodes: SaveItemBarcodes,
+    val getItems: GetItems,
 )

@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class CustomerCreditRequest(
     @SerializedName("customerId")
-    val customerId: String? = null,
+    val customerId: String?,
     @SerializedName("getPartialPaymentCredit")
-    val getPartialPaymentCredit: Boolean? = null
+    val getPartialPaymentCredit: Boolean?,
 )

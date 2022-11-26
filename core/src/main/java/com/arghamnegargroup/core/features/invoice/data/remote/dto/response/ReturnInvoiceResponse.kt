@@ -9,7 +9,7 @@ data class ReturnInvoiceResponse(
     @SerializedName("GetInvoiceByInvoiceNumberResult")
     val order: String?
 ) {
-    fun getOrder(): Order {
+    fun getOrder(): Order? {
         return Gson().fromJson(order, Order::class.java)
     }
 }

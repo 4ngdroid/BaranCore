@@ -5,12 +5,25 @@ import com.arghamnegargroup.core.features.auth.domain.usecase.AuthUseCase
 import com.arghamnegargroup.core.features.auth.domain.usecase.GetUser
 import com.arghamnegargroup.core.features.auth.domain.usecase.Login
 import com.arghamnegargroup.core.features.connectivity.domain.usecase.Check
+import com.arghamnegargroup.core.features.customer.domain.repository.CustomerRepository
+import com.arghamnegargroup.core.features.customer.domain.usecase.*
 import com.arghamnegargroup.core.features.dictionary.domain.repository.DictionaryRepository
 import com.arghamnegargroup.core.features.dictionary.domain.usecase.GetDictionaries
 import com.arghamnegargroup.core.features.document.domain.repository.DocumentRepository
 import com.arghamnegargroup.core.features.document.domain.usecase.*
+import com.arghamnegargroup.core.features.invoice.domain.repository.InvoiceRepository
+import com.arghamnegargroup.core.features.invoice.domain.usecase.*
 import com.arghamnegargroup.core.features.item.domain.repository.ItemRepository
 import com.arghamnegargroup.core.features.item.domain.usecase.*
+import com.arghamnegargroup.core.features.order.domain.repository.OrderRepository
+import com.arghamnegargroup.core.features.order.domain.usecase.GetSuspendOrders
+import com.arghamnegargroup.core.features.order.domain.usecase.OrderUseCase
+import com.arghamnegargroup.core.features.order.domain.usecase.ResumeSuspendOrder
+import com.arghamnegargroup.core.features.order.domain.usecase.SuspendOrder
+import com.arghamnegargroup.core.features.quickitems.domain.repository.QuickItemsRepository
+import com.arghamnegargroup.core.features.quickitems.domain.usecase.GetQuickItems
+import com.arghamnegargroup.core.features.reason.domain.repository.ReasonRepository
+import com.arghamnegargroup.core.features.reason.domain.usecase.GetReasons
 import com.arghamnegargroup.core.features.section.domain.repository.SectionRepository
 import com.arghamnegargroup.core.features.section.domain.usecase.GetStockSection
 import com.arghamnegargroup.core.features.section.domain.usecase.GetStockSections
@@ -22,6 +35,8 @@ import com.arghamnegargroup.core.features.store.domain.repository.StoreRepositor
 import com.arghamnegargroup.core.features.store.domain.usecase.GetStores
 import com.arghamnegargroup.core.features.supplier.domain.repository.SupplierRepository
 import com.arghamnegargroup.core.features.supplier.domain.usecase.GetSuppliers
+import com.arghamnegargroup.core.features.table.domain.repository.TableRepository
+import com.arghamnegargroup.core.features.table.domain.usecase.GetTables
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -84,7 +99,8 @@ object UseCaseModule {
             saveItemInfo = SaveItemInfo(itemRepository),
             search = Search(itemRepository, stockRepository, authRepository),
             getItemBarcode = GetItemBarcode(itemRepository),
-            saveItemBarcodes = SaveItemBarcodes(itemRepository)
+            saveItemBarcodes = SaveItemBarcodes(itemRepository),
+            getItems = GetItems(itemRepository)
         )
     }
 
@@ -131,4 +147,66 @@ object UseCaseModule {
         )
     }
 
+    @Provides
+    @Singleton
+    fun provideCustomerUseCase(
+        customerRepository: CustomerRepository,
+    ): CustomerUseCase {
+        return CustomerUseCase(
+            getCustomer = GetCustomer(customerRepository),
+            saveCustomer = SaveCustomer(customerRepository),
+            getCredit = GetCredit(customerRepository),
+            useCredit = UseCredit(customerRepository),
+            useRemainCredit = UseRemainCredit(customerRepository)
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideInvoiceUseCase(
+        invoiceRepository: InvoiceRepository,
+    ): InvoiceUseCase {
+        return InvoiceUseCase(
+            saveSaleInvoice = SaveSaleInvoice(invoiceRepository),
+            calcInvoice = CalcInvoice(invoiceRepository),
+            saveReturnInvoice = SaveReturnInvoice(invoiceRepository),
+            getInvoice = GetInvoice(invoiceRepository)
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideOrderUseCase(
+        orderRepository: OrderRepository,
+    ): OrderUseCase {
+        return OrderUseCase(
+            getSuspendOrders = GetSuspendOrders(orderRepository),
+            resumeSuspendOrder = ResumeSuspendOrder(orderRepository),
+            suspendOrder = SuspendOrder(orderRepository)
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideQuickItems(
+        quickItemsRepository: QuickItemsRepository,
+    ): GetQuickItems {
+        return GetQuickItems(quickItemsRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetReasons(
+        reasonRepository: ReasonRepository,
+    ): GetReasons {
+        return GetReasons(reasonRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetTables(
+        tableRepository: TableRepository,
+    ): GetTables {
+        return GetTables(tableRepository)
+    }
 }

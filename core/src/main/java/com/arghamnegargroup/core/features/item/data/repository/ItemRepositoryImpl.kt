@@ -4,13 +4,14 @@ import com.arghamnegargroup.core.features.connectivity.domain.repository.Connect
 import com.arghamnegargroup.core.features.core.data.datasource.BaranDatabase
 import com.arghamnegargroup.core.features.core.data.remote.BaranApi
 import com.arghamnegargroup.core.features.core.data.remote.Endpoints
-import com.arghamnegargroup.core.features.core.util.ext.isSuccessfull
+import com.arghamnegargroup.core.features.core.util.ext.isSuccessful
 import com.arghamnegargroup.core.features.item.data.remote.dto.request.ItemInfoRequest
 import com.arghamnegargroup.core.features.item.data.remote.dto.request.SaveItemInfoRequest
 import com.arghamnegargroup.core.features.item.data.remote.dto.request.SearchRequest
 import com.arghamnegargroup.core.features.item.data.remote.dto.response.ItemBarcodesResponse
 import com.arghamnegargroup.core.features.item.domain.model.Item
 import com.arghamnegargroup.core.features.item.domain.model.ItemBarcode
+import com.arghamnegargroup.core.features.item.domain.model.ItemsResponse
 import com.arghamnegargroup.core.features.item.domain.repository.ItemRepository
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -32,7 +33,7 @@ class ItemRepositoryImpl(
 
     override suspend fun saveItemInfo(request: SaveItemInfoRequest): Result<Unit> {
         val result = api.saveItemInfo(connectionRepository.getUrl(Endpoints.SAVE_ITEM_INFO), request).result
-        return if (result.isSuccessfull) Result.success(Unit)
+        return if (result.isSuccessful) Result.success(Unit)
         else Result.failure(Exception(result.message))
     }
 
@@ -57,5 +58,9 @@ class ItemRepositoryImpl(
 
     override suspend fun deleteItemBarcodes(): Int {
         return db.itemBarcodeDao().deleteItemBarcodes()
+    }
+
+    override suspend fun getItems(): List<Item> {
+        return api.getItems(connectionRepository.getUrl(Endpoints.GET_ITEMS)).items
     }
 }

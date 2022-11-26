@@ -18,6 +18,7 @@ import com.arghamnegargroup.core.features.document.data.remote.dto.request.SaveB
 import com.arghamnegargroup.core.features.document.data.remote.dto.response.BookDocumentResponse
 import com.arghamnegargroup.core.features.document.data.remote.dto.response.DocumentInfoResponse
 import com.arghamnegargroup.core.features.invoice.data.remote.dto.request.CalcInvoiceRequest
+import com.arghamnegargroup.core.features.invoice.data.remote.dto.request.GetInvoiceRequest
 import com.arghamnegargroup.core.features.invoice.data.remote.dto.request.ReturnInvoiceRequest
 import com.arghamnegargroup.core.features.invoice.data.remote.dto.request.SaleInvoiceRequest
 import com.arghamnegargroup.core.features.invoice.data.remote.dto.response.CalcInvoiceResponse
@@ -118,10 +119,7 @@ interface BaranApi {
     suspend fun suspendOrder(@Url url: String, @Body request: SuspendOrderRequest): SuspendOrderResponse
 
     @POST
-    suspend fun resumeSuspendOrder(
-        @Url url: String,
-        @Body request: ResumeSuspendOrderRequest,
-    ): ResumeSuspendOrderResponse
+    suspend fun resumeSuspendOrder(@Url url: String, @Body request: ResumeSuspendOrderRequest): ResumeSuspendOrderResponse
 
     @POST
     suspend fun saveSaleInvoiceByOrder(@Url url: String, @Body request: SaleInvoiceRequest): SaveSaleInvoiceResponse
@@ -133,12 +131,8 @@ interface BaranApi {
     @GET
     suspend fun getItems(@Url url: String): ItemsResponse
 
-    @Streaming
-    @GET
-    suspend fun _getItems(@Url url: String): ResponseBody
-
     @POST
-    suspend fun getInvoice(@Url url: String, @Body request: ReturnInvoiceRequest): ReturnInvoiceResponse
+    suspend fun getInvoice(@Url url: String, @Body request: GetInvoiceRequest): ReturnInvoiceResponse
 
     @POST
     suspend fun saveReturnInvoice(@Url url: String, @Body request: ReturnInvoiceRequest): SaveReturnInvoiceResponse

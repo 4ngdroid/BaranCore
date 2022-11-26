@@ -4,7 +4,7 @@ import com.arghamnegargroup.core.features.connectivity.domain.repository.Connect
 import com.arghamnegargroup.core.features.core.data.datasource.BaranDatabase
 import com.arghamnegargroup.core.features.core.data.remote.BaranApi
 import com.arghamnegargroup.core.features.core.data.remote.Endpoints
-import com.arghamnegargroup.core.features.core.util.ext.isSuccessfull
+import com.arghamnegargroup.core.features.core.util.ext.isSuccessful
 import com.arghamnegargroup.core.features.document.data.remote.dto.request.BookStockDocumentRequest
 import com.arghamnegargroup.core.features.document.data.remote.dto.request.DocumentInfoRequest
 import com.arghamnegargroup.core.features.document.data.remote.dto.request.SaveBarcodeFileRequest
@@ -25,7 +25,7 @@ class DocumentRepositoryImpl(
 
     override suspend fun bookDocument(request: BookStockDocumentRequest): Result<Unit> {
         val response = api.bookStockDocument(connectionRepository.getUrl(Endpoints.BOOK_STOCK_DOCUMENT), request)
-        if (!response.result.isSuccessfull) {
+        if (!response.result.isSuccessful) {
             return Result.failure(Exception(response.result.message))
         }
         return Result.success(Unit)

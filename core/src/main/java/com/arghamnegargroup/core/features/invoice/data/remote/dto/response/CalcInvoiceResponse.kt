@@ -8,7 +8,7 @@ data class CalcInvoiceResponse(
     @SerializedName("CalcInvoiceResult")
     private val order: String?
 ) {
-    fun getOrder(): Order {
+    fun getOrder(): Order? {
         return Gson().fromJson(order, Order::class.java)
     }
 }
