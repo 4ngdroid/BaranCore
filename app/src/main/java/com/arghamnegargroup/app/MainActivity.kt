@@ -1,9 +1,9 @@
-package com.arghamnegargroup.core
+package com.arghamnegargroup.app
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
-import com.arghamnegargroup.core.databinding.ActivityMainBinding
+import com.arghamnegargroup.app.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

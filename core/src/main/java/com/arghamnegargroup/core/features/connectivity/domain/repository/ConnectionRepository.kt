@@ -4,19 +4,19 @@ import com.arghamnegargroup.core.features.connectivity.data.pref.ConnectionPrefe
 
 interface ConnectionRepository {
 
-    fun getIP(): String?
+    fun getIP(): String
     fun setIP(IP: String)
     fun removeIP()
 
-    fun getPort(): String?
+    fun getPort(): String
     fun setPort(port: String)
     fun removePort()
 
-    fun getUsername(): String?
+    fun getUsername(): String
     fun setUsername(username: String)
     fun removeUsername()
 
-    fun getPassword(): String?
+    fun getPassword(): String
     fun setPassword(password: String)
     fun removePassword()
 

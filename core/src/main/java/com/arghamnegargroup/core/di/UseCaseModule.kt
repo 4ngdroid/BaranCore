@@ -30,9 +30,9 @@ import com.arghamnegargroup.core.features.section.domain.usecase.GetStockSection
 import com.arghamnegargroup.core.features.section.domain.usecase.ItemAssignmentToSection
 import com.arghamnegargroup.core.features.section.domain.usecase.SectionUseCase
 import com.arghamnegargroup.core.features.stock.domain.repository.StockRepository
-import com.arghamnegargroup.core.features.stock.domain.usecase.GetStocks
+import com.arghamnegargroup.core.features.stock.domain.usecase.*
 import com.arghamnegargroup.core.features.store.domain.repository.StoreRepository
-import com.arghamnegargroup.core.features.store.domain.usecase.GetStores
+import com.arghamnegargroup.core.features.store.domain.usecase.*
 import com.arghamnegargroup.core.features.supplier.domain.repository.SupplierRepository
 import com.arghamnegargroup.core.features.supplier.domain.usecase.GetSuppliers
 import com.arghamnegargroup.core.features.table.domain.repository.TableRepository
@@ -71,14 +71,24 @@ object UseCaseModule {
 
     @Provides
     @Singleton
-    fun provideStockUseCase(repository: StockRepository): GetStocks {
-        return GetStocks(repository)
+    fun provideStockUseCase(repository: StockRepository): StockUseCase {
+        return StockUseCase(
+            getStocks = GetStocks(repository),
+            getStock = GetStock(repository),
+            saveStock = SaveStock(repository),
+            removeStock = RemoveStock(repository)
+        )
     }
 
     @Provides
     @Singleton
-    fun provideStoreUseCase(repository: StoreRepository): GetStores {
-        return GetStores(repository)
+    fun provideStoreUseCase(repository: StoreRepository): StoreUseCase {
+        return StoreUseCase(
+            getStores = GetStores(repository),
+            getStore = GetStore(repository),
+            saveStore = SaveStore(repository),
+            removeStore = RemoveStore(repository)
+        )
     }
 
     @Provides

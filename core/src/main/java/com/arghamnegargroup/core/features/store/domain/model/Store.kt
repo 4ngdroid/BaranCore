@@ -22,10 +22,10 @@ data class Store(
 
     @PrimaryKey
     @SerializedName("StoreID")
-    var storeID: Int? = null,
+    var id: Int? = null,
 
     @SerializedName("StoreName")
-    var storeName: String? = null,
+    var name: String? = null,
 
     @SerializedName("Telephone")
     var telephone: String? = null,

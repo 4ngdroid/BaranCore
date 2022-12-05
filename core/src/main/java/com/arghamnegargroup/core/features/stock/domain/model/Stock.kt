@@ -13,8 +13,8 @@ import kotlinx.parcelize.Parcelize
 data class Stock(
     @PrimaryKey
     @SerializedName("StockID")
-    val stockID: String,
+    val id: String,
 
     @SerializedName("StockName")
-    val stockName: String?
+    val name: String?
 ) : Parcelable

@@ -47,11 +47,11 @@ class DocumentRepositoryImpl(
     }
 
     override suspend fun setSourceStock(id: Int, sourceStock: Stock?) {
-        return db.documentDao().setSourceStock(id, sourceStock?.stockID, sourceStock?.stockName)
+        return db.documentDao().setSourceStock(id, sourceStock?.id, sourceStock?.name)
     }
 
     override suspend fun setTargetStock(id: Int, targetStock: Stock?) {
-        return db.documentDao().setTargetStock(id, targetStock?.stockID, targetStock?.stockName)
+        return db.documentDao().setTargetStock(id, targetStock?.id, targetStock?.name)
     }
 
     override suspend fun setThirdParty(id: Int, thirdParty: ThirdParty?) {

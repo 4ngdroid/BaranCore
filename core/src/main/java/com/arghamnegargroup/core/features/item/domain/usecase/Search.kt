@@ -15,7 +15,7 @@ class Search(
         return try {
             val items = repository.search(SearchRequest(query,
                 authRepository.getUser()?.userID,
-                stockRepository.getCurrentStock()?.stockID))
+                stockRepository.getCurrentStock()?.id))
             Result.success(items)
         } catch (e: Throwable) {
             Result.failure(e)

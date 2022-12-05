@@ -16,7 +16,7 @@ class GetStockSection(
                 return Result.failure(NullPointerException("کد قفسه را پر کنید."))
             return Result.success(
                 sectionRepository.getStockSection(StockSectionRequest(code,
-                    stockRepository.getCurrentStock()?.stockID)))
+                    stockRepository.getCurrentStock()?.id)))
         } catch (e: Throwable) {
             return Result.failure(e)
         }

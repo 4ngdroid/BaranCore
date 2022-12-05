@@ -8,8 +8,8 @@ import com.arghamnegargroup.core.features.core.util.ext.toLatinDigits
 class ConnectionRepositoryImpl(
     private val preferences: ConnectionPreferences,
 ) : ConnectionRepository {
-    override fun getIP(): String? {
-        return preferences.getIP()
+    override fun getIP(): String {
+        return preferences.getIP() ?: ""
     }
 
     override fun setIP(IP: String) {
@@ -20,8 +20,8 @@ class ConnectionRepositoryImpl(
         return preferences.removeIP()
     }
 
-    override fun getPort(): String? {
-        return preferences.getPort()
+    override fun getPort(): String {
+        return preferences.getPort() ?: ""
     }
 
     override fun setPort(port: String) {
@@ -32,8 +32,8 @@ class ConnectionRepositoryImpl(
         return preferences.removePort()
     }
 
-    override fun getUsername(): String? {
-        return preferences.getUsername()
+    override fun getUsername(): String {
+        return preferences.getUsername() ?: ""
     }
 
     override fun setUsername(username: String) {
@@ -44,8 +44,8 @@ class ConnectionRepositoryImpl(
         return preferences.removeUsername()
     }
 
-    override fun getPassword(): String? {
-        return preferences.getPassword()
+    override fun getPassword(): String {
+        return preferences.getPassword() ?: ""
     }
 
     override fun setPassword(password: String) {
@@ -67,6 +67,9 @@ class ConnectionRepositoryImpl(
     }
 
     override fun getCredentials(): String {
-        return "Basic " + Base64.encodeToString("${getUsername()}:${getPassword()}".toByteArray(), Base64.NO_WRAP)
+        return "Basic " + Base64.encodeToString(
+            "${getUsername()}:${getPassword()}".toByteArray(),
+            Base64.NO_WRAP
+        )
     }
 }

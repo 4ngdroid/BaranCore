@@ -17,7 +17,7 @@ class GetItemInfo(
 
             val item = repository.getItemInfo(ItemInfoRequest(
                 barcode = barcode,
-                stockId = stockId ?: stockRepository.getCurrentStock()?.stockID,
+                stockId = stockId ?: stockRepository.getCurrentStock()?.id,
                 supplierId = supplierId)
             ) ?: return Result.failure(NullPointerException("کالا یافت نشد."))
 
