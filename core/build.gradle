@@ -4,17 +4,17 @@ plugins {
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
     id 'dagger.hilt.android.plugin'
-    id 'maven-publish'
 }
 
 android {
+    namespace = 'com.arghamnegargroup.core'
     compileSdk 32
 
     defaultConfig {
         minSdk 21
         targetSdk 32
         versionCode 1
-        versionName "1.0.0"
+        versionName version
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
