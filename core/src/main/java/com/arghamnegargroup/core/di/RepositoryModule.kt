@@ -13,6 +13,8 @@ import com.arghamnegargroup.core.features.document.data.repository.DocumentRepos
 import com.arghamnegargroup.core.features.document.domain.repository.DocumentRepository
 import com.arghamnegargroup.core.features.item.data.repository.ItemRepositoryImpl
 import com.arghamnegargroup.core.features.item.domain.repository.ItemRepository
+import com.arghamnegargroup.core.features.quickitems.data.repository.QuickItemsRepositoryImpl
+import com.arghamnegargroup.core.features.quickitems.domain.repository.QuickItemsRepository
 import com.arghamnegargroup.core.features.section.data.repository.SectionRepositoryImpl
 import com.arghamnegargroup.core.features.section.domain.repository.SectionRepository
 import com.arghamnegargroup.core.features.stock.data.pref.StockPreferences
@@ -108,6 +110,16 @@ object RepositoryModule {
         connectionRepository: ConnectionRepository,
     ): ItemRepository {
         return ItemRepositoryImpl(api, db, connectionRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideQuickItemRepository(
+        api: BaranApi,
+        db: BaranDatabase,
+        connectionRepository: ConnectionRepository
+    ): QuickItemsRepository {
+        return QuickItemsRepositoryImpl(db, api, connectionRepository)
     }
 
     @Provides
