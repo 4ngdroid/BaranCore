@@ -7,11 +7,13 @@ import com.arghamnegargroup.core.features.auth.data.datasource.AuthDao
 import com.arghamnegargroup.core.features.auth.domain.model.User
 import com.arghamnegargroup.core.features.core.domain.util.converter.IntConverter
 import com.arghamnegargroup.core.features.core.domain.util.converter.StringConverter
+import com.arghamnegargroup.core.features.department.data.datasource.DepartmentDao
 import com.arghamnegargroup.core.features.department.domain.util.converter.DepartmentConverter
 import com.arghamnegargroup.core.features.document.data.datasource.DocumentDao
 import com.arghamnegargroup.core.features.document.domain.model.Document
 import com.arghamnegargroup.core.features.document.domain.util.converter.StatusConverter
 import com.arghamnegargroup.core.features.item.data.datasource.ItemBarcodeDao
+import com.arghamnegargroup.core.features.item.data.datasource.ItemDao
 import com.arghamnegargroup.core.features.item.domain.model.ItemBarcode
 import com.arghamnegargroup.core.features.item.domain.util.converter.ItemConverter
 import com.arghamnegargroup.core.features.stock.data.datasource.StockDao
@@ -33,7 +35,8 @@ import com.arghamnegargroup.core.features.supplier.domain.model.Supplier
     StringConverter::class,
     IntConverter::class,
     ItemConverter::class,
-    StatusConverter::class)
+    StatusConverter::class
+)
 abstract class BaranDatabase : RoomDatabase() {
 
     abstract fun authDao(): AuthDao
@@ -42,6 +45,8 @@ abstract class BaranDatabase : RoomDatabase() {
     abstract fun storeDao(): StoreDao
     abstract fun documentDao(): DocumentDao
     abstract fun itemBarcodeDao(): ItemBarcodeDao
+    abstract fun departmentDao(): DepartmentDao
+    abstract fun itemDao(): ItemDao
 
     companion object {
         const val DATABASE_NAME = "baran_db"

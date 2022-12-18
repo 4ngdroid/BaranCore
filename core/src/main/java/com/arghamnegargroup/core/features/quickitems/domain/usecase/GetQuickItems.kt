@@ -9,9 +9,11 @@ class GetQuickItems(
 
     suspend operator fun invoke(): Result<QuickItems> {
         return try {
-            Result.success(repository.getQuickItems())
+            val stores = repository.getQuickItemsRemote()
+            repository.saveQuickItems(stores)
+            Result.success(stores)
         } catch (e: Throwable) {
-            Result.failure(e)
+            Result.success(repository.getQuickItemsLocal())
         }
     }
 }

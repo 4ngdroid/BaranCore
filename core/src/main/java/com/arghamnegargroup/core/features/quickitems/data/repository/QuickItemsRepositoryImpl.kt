@@ -13,7 +13,20 @@ class QuickItemsRepositoryImpl(
     private val connectionRepository: ConnectionRepository,
 ) : QuickItemsRepository {
 
-    override suspend fun getQuickItems(): QuickItems {
+    override suspend fun getQuickItemsRemote(): QuickItems {
         return api.getQuickItems(connectionRepository.getUrl(Endpoints.GET_QUICK_ITEMS)).quickItems
+    }
+
+    override suspend fun getQuickItemsLocal(): QuickItems {
+        val departments = db.departmentDao().getDepartments()
+        val items = db.itemDao().getItems()
+        return QuickItems(departments, items)
+    }
+
+    override suspend fun saveQuickItems(quickItems: QuickItems) {
+        db.departmentDao().deleteDepartments()
+        db.departmentDao().saveDepartments(quickItems.departments)
+        db.itemDao().deleteItems()
+        db.itemDao().saveItems(quickItems.items)
     }
 }
