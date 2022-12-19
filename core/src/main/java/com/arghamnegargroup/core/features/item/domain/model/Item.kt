@@ -2,139 +2,142 @@ package com.arghamnegargroup.core.features.item.domain.model
 
 import android.os.Parcelable
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.arghamnegargroup.core.features.order.domain.model.OrderItem
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
+import java.util.UUID
 
 @Parcelize
 @Entity
 data class Item(
     @SerializedName("AllowToRecieve")
-    val allowToReceive: Boolean? = null,
+    var allowToReceive: Boolean? = null,
     @SerializedName("Attributes")
-    val attributes: List<Attribute>? = null,
+    var attributes: List<Attribute>? = null,
     @SerializedName("BonusCount")
-    val bonusCount: Double? = null,
+    var bonusCount: Double? = null,
     @SerializedName("Barcode")
-    val barcode: String? = null,
+    var barcode: String? = null,
     @SerializedName("Brand")
-    val brand: String? = null,
+    var brand: String? = null,
     @SerializedName("BrandID")
-    val brandId: String? = null,
+    var brandId: String? = null,
     @SerializedName("BulkPrice")
-    val bulkPrice: Double? = null,
+    var bulkPrice: Double? = null,
     @SerializedName("Collection")
-    val collections: List<Collection>? = null,
+    var collections: List<Collection>? = null,
     @SerializedName("ConsumerPrice")
-    val consumerPrice: Double? = null,
+    var consumerPrice: Double? = null,
     @SerializedName("ContractConsumerPrice")
-    val contractConsumerPrice: Double? = null,
+    var contractConsumerPrice: Double? = null,
     @SerializedName("ContractID")
-    val contractID: String? = null,
+    var contractID: String? = null,
     @SerializedName("ContractNumber")
-    val contractNumber: String? = null,
+    var contractNumber: String? = null,
     @SerializedName("ContractType")
-    val contractType: String? = null,
+    var contractType: String? = null,
     @SerializedName("ContractTypeID")
-    val contractTypeId: Int? = null,
+    var contractTypeId: Int? = null,
     @SerializedName("Cost")
-    val cost: Double? = null,
+    var cost: Double? = null,
     @SerializedName("CustomFields")
-    val customFields: List<CustomField>? = null,
+    var customFields: List<CustomField>? = null,
     @SerializedName("CurrentDiscount")
-    val currentDiscount: Double? = null,
+    var currentDiscount: Double? = null,
     @SerializedName("CurrentUnitCount")
-    val currentUnitCount: Double? = null,
+    var currentUnitCount: Double? = null,
     @SerializedName("DamagedCount")
-    val damagedCount: Double? = null,
+    var damagedCount: Double? = null,
     @SerializedName("DeactiveConsumerPrice")
-    val deactivatedConsumerPrice: Double? = null,
+    var deactivatedConsumerPrice: Double? = null,
     @SerializedName("DeactivePrice")
-    val deactivatedPrice: Double? = null,
+    var deactivatedPrice: Double? = null,
     @SerializedName("DepartmentID")
-    val departmentId: String? = null,
+    var departmentId: String? = null,
     @SerializedName("DepartmentName")
-    val departmentName: String? = null,
+    var departmentName: String? = null,
     @SerializedName("Description")
-    val description: String? = null,
+    var description: String? = null,
     @SerializedName("Discount")
-    val discount: Double? = null,
+    var discount: Double? = null,
     @SerializedName("Discount1")
-    val discount1: Double? = null,
+    var discount1: Double? = null,
     @SerializedName("Discount2")
-    val discount2: Double? = null,
+    var discount2: Double? = null,
     @SerializedName("Discount3")
-    val discount3: Double? = null,
+    var discount3: Double? = null,
     @SerializedName("Discount4")
-    val discount4: Double? = null,
+    var discount4: Double? = null,
     @SerializedName("Discount5")
-    val discount5: Double? = null,
+    var discount5: Double? = null,
     @SerializedName("ImageUrl")
-    val imageUrl: String? = null,
+    var imageUrl: String? = null,
     @SerializedName("IsNotFound")
-    val isNotFound: Boolean? = null,
+    var notFound: Boolean? = null,
     @SerializedName("IsNotInOrder")
-    val isNotInOrder: Boolean? = null,
+    var notInOrder: Boolean? = null,
+    @PrimaryKey(autoGenerate = false)
     @SerializedName("ItemID")
-    val itemId: String? = null,
+    var itemId: String = UUID(0L, 0L).toString(),
     @SerializedName("LineItemID")
-    val lineItemId: Int? = null,
+    var lineItemId: Int? = null,
     @SerializedName("ManufacturerPrice")
-    val manufacturerPrice: Double? = null,
+    var manufacturerPrice: Double? = null,
     @SerializedName("MaximumOrderOverage")
-    val maximumOrderOverage: Double? = null,
+    var maximumOrderOverage: Double? = null,
     @SerializedName("Name")
-    val name: String? = null,
+    var name: String? = null,
     @SerializedName("NameInPOS")
-    val nameInPOS: String? = null,
+    var nameInPOS: String? = null,
     @SerializedName("NegativeCost")
-    val negativeCost: Double? = null,
+    var negativeCost: Double? = null,
     @SerializedName("NetCost")
-    val netCost: Double? = null,
+    var netCost: Double? = null,
     @SerializedName("OrderCount")
-    val orderCount: Double? = null,
+    var orderCount: Double? = null,
     @SerializedName("PackCount")
-    val packCount: Double? = null,
+    var packCount: Double? = null,
     @SerializedName("PackNumber")
-    val packNumber: Double? = null,
+    var packNumber: Double? = null,
     @SerializedName("PackUnitCount")
-    val packUnitCount: Double? = null,
+    var packUnitCount: Double? = null,
     @SerializedName("ParentID")
-    val parentId: String? = null,
+    var parentId: String? = null,
     @SerializedName("PositiveCost")
-    val positiveCost: Double? = null,
+    var positiveCost: Double? = null,
     @SerializedName("Price")
-    val price: Double? = null,
+    var price: Double? = null,
     @SerializedName("PriceWithTax")
-    val priceWithTax: Double? = null,
+    var priceWithTax: Double? = null,
     @SerializedName("Quantity")
-    val quantity: Double? = null,
+    var quantity: Double? = null,
     @SerializedName("RecieveMoreThanOrder")
-    val receiveMoreThanOrder: Boolean? = null,
+    var receiveMoreThanOrder: Boolean? = null,
     @SerializedName("ScannedCount")
-    val scannedCount: Double? = null,
+    var scannedCount: Double? = null,
     @SerializedName("Status")
-    val status: Boolean? = null,
+    var status: Boolean? = null,
     @SerializedName("StockQuantity")
-    val stockQuantity: Double? = null,
+    var stockQuantity: Double? = null,
     @SerializedName("StockSection")
-    val stockSection: String? = null,
+    var stockSection: String? = null,
     @SerializedName("SKU")
-    val sku: String? = null,
+    var sku: String? = null,
     @SerializedName("SupplierDiscount")
-    val supplierDiscount: Double? = null,
+    var supplierDiscount: Double? = null,
     @SerializedName("SupplierDiscountPercent")
-    val supplierDiscountPercent: Double? = null,
+    var supplierDiscountPercent: Double? = null,
     @SerializedName("Tax")
-    val tax: Double? = null,
+    var tax: Double? = null,
     @SerializedName("TemporaryPrice")
-    val temporaryPrice: Double? = null,
+    var temporaryPrice: Double? = null,
     @SerializedName("Toll")
-    val toll: Double? = null,
+    var toll: Double? = null,
     @SerializedName("TypeID")
-    val typeId: Int? = null,
+    var typeId: Int? = null,
     @SerializedName("UnitOfMeasureID")
-    val unitOfMeasureId: Int? = null,
+    var unitOfMeasureId: Int? = null,
 
     @Transient
     var orderItem: Boolean? = null,
@@ -147,8 +150,8 @@ fun Item.toOrderItem(): OrderItem {
         details = null,
         discount = discount,
         discounts = null,
-        isDelivery = null,
-        isPriceWithTax = null,
+        delivery = null,
+        priceWithTax = null,
         itemId = itemId,
         lineItemId = lineItemId,
         itemName = name,

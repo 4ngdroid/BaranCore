@@ -2,10 +2,9 @@ package com.arghamnegargroup.core.features.order.domain.model
 
 import android.os.Parcelable
 import com.arghamnegargroup.core.features.item.domain.model.Item
-import com.arghamnegargroup.core.features.order.domain.model.Detail
-import com.arghamnegargroup.core.features.order.domain.model.OrderDiscount
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
+import java.util.*
 
 @Parcelize
 data class OrderItem(
@@ -20,9 +19,9 @@ data class OrderItem(
     @SerializedName("Discounts")
     val discounts: List<OrderDiscount>? = null,
     @SerializedName("IsDelivery")
-    val isDelivery: Boolean? = null,
+    val delivery: Boolean? = null,
     @SerializedName("IsPriceWithTax")
-    val isPriceWithTax: Boolean? = null,
+    val priceWithTax: Boolean? = null,
     @SerializedName("ItemId")
     val itemId: String? = null,
     @SerializedName("LineItemID")
@@ -84,9 +83,9 @@ fun OrderItem.toItem(): Item {
         discount4 = null,
         discount5 = null,
         imageUrl = null,
-        isNotFound = null,
-        isNotInOrder = null,
-        itemId = itemId,
+        notFound = null,
+        notInOrder = null,
+        itemId = itemId ?: UUID(0L, 0L).toString(),
         lineItemId = lineItemId,
         manufacturerPrice = null,
         maximumOrderOverage = null,
