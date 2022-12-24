@@ -31,7 +31,7 @@ data class OrderItem(
     @SerializedName("NetAmount")
     val netAmount: Double? = null,
     @SerializedName("OperationType")
-    val operationType: Int? = null,
+    val operationType: Int? = 1,
     @SerializedName("OrderId")
     val orderId: String? = null,
     @SerializedName("Price")

@@ -156,7 +156,7 @@ fun Item.toOrderItem(): OrderItem {
         lineItemId = lineItemId,
         itemName = name,
         netAmount = null,
-        operationType = null,
+        operationType = 1,
         orderId = null,
         price = price,
         quantity = quantity,
