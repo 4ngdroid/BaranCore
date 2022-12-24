@@ -12,7 +12,7 @@ data class Order(
     @SerializedName("CustomerId")
     val customerId: String? = null,
     @SerializedName("SaleChannelId")
-    val saleChannelId:Int,
+    val saleChannelId: Int = SaleChannel.Retail.value,
     @SerializedName("CustomerName")
     val customerName: String? = null,
     @SerializedName("DeliveryCost")
