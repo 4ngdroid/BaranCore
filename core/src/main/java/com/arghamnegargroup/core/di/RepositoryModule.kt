@@ -11,6 +11,8 @@ import com.arghamnegargroup.core.features.dictionary.data.repository.DictionaryR
 import com.arghamnegargroup.core.features.dictionary.domain.repository.DictionaryRepository
 import com.arghamnegargroup.core.features.document.data.repository.DocumentRepositoryImpl
 import com.arghamnegargroup.core.features.document.domain.repository.DocumentRepository
+import com.arghamnegargroup.core.features.invoice.data.repository.InvoiceRepositoryImpl
+import com.arghamnegargroup.core.features.invoice.domain.repository.InvoiceRepository
 import com.arghamnegargroup.core.features.item.data.repository.ItemRepositoryImpl
 import com.arghamnegargroup.core.features.item.domain.repository.ItemRepository
 import com.arghamnegargroup.core.features.quickitems.data.repository.QuickItemsRepositoryImpl
@@ -129,5 +131,14 @@ object RepositoryModule {
         connectionRepository: ConnectionRepository,
     ): SectionRepository {
         return SectionRepositoryImpl(api, connectionRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideInvoiceRepository(
+        api: BaranApi,
+        connectionRepository: ConnectionRepository
+    ): InvoiceRepository {
+        return InvoiceRepositoryImpl(api, connectionRepository)
     }
 }
