@@ -14,7 +14,7 @@ import retrofit2.http.Url
 
 interface InvoiceRepository {
 
-    suspend fun saveSaleInvoiceByOrder(request: SaleInvoiceRequest): Result<Unit>
+    suspend fun saveSaleInvoiceByOrder(request: SaleInvoiceRequest): Result<String>
 
     suspend fun calcInvoice(request: CalcInvoiceRequest): Order?
 

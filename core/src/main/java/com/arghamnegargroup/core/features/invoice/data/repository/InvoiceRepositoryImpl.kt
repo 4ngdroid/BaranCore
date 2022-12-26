@@ -17,26 +17,36 @@ class InvoiceRepositoryImpl(
     private val connectionRepository: ConnectionRepository,
 ) : InvoiceRepository {
 
-    override suspend fun saveSaleInvoiceByOrder(request: SaleInvoiceRequest): Result<Unit> {
-        val response = api.saveSaleInvoiceByOrder(connectionRepository.getUrl(Endpoints.SAVE_SALE_INVOICE), request)
+    override suspend fun saveSaleInvoiceByOrder(request: SaleInvoiceRequest): Result<String> {
+        val response = api.saveSaleInvoiceByOrder(
+            connectionRepository.getUrl(Endpoints.SAVE_SALE_INVOICE),
+            request
+        )
         return if (response.general.isSuccessful)
-            Result.success(Unit)
+            Result.success(response.general?.message ?: "")
         else Result.failure(Exception(response.general?.message))
     }
 
     override suspend fun calcInvoice(request: CalcInvoiceRequest): Order? {
-        return api.calcInvoice(connectionRepository.getUrl(Endpoints.CALC_INVOICE), request).getOrder()
+        return api.calcInvoice(connectionRepository.getUrl(Endpoints.CALC_INVOICE), request)
+            .getOrder()
     }
 
     override suspend fun saveReturnInvoice(request: ReturnInvoiceRequest): Result<Unit> {
-        val response = api.saveReturnInvoice(connectionRepository.getUrl(Endpoints.SAVE_RETURN_INVOICE), request)
+        val response = api.saveReturnInvoice(
+            connectionRepository.getUrl(Endpoints.SAVE_RETURN_INVOICE),
+            request
+        )
         return if (response.general.isSuccessful)
             Result.success(Unit)
         else Result.failure(Exception(response.general?.message))
     }
 
     override suspend fun getInvoice(request: GetInvoiceRequest): Order? {
-        return api.getInvoice(connectionRepository.getUrl(Endpoints.GET_INVOICE_BY_INVOICE_NUMBER), request).getOrder()
+        return api.getInvoice(
+            connectionRepository.getUrl(Endpoints.GET_INVOICE_BY_INVOICE_NUMBER),
+            request
+        ).getOrder()
     }
 
 

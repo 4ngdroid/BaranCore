@@ -30,7 +30,7 @@ data class Order(
     @SerializedName("Discounts")
     val discounts: List<OrderDiscount>? = null,
     @SerializedName("ExpectedAmount")
-    val expectedAmount: Int? = null,
+    val expectedAmount: Double? = null,
     @SerializedName("Id")
     val id: String? = null,
     @SerializedName("Items")

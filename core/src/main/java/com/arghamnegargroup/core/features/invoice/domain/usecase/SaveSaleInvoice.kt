@@ -15,11 +15,13 @@ class SaveSaleInvoice(
         calcTax: Boolean?,
         allowToMakeInvoice: Boolean?,
         useCredit: Boolean = true,
-    ): Result<Unit> {
+    ): Result<String> {
         return try {
-            repository.saveSaleInvoiceByOrder(SaleInvoiceRequest(
-                order, calcPromotion, calcTax, allowToMakeInvoice, useCredit
-            ))
+            repository.saveSaleInvoiceByOrder(
+                SaleInvoiceRequest(
+                    order, calcPromotion, calcTax, allowToMakeInvoice, useCredit
+                )
+            )
         } catch (e: Throwable) {
             Result.failure(e)
         }
