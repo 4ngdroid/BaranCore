@@ -15,6 +15,8 @@ import com.arghamnegargroup.core.features.invoice.data.repository.InvoiceReposit
 import com.arghamnegargroup.core.features.invoice.domain.repository.InvoiceRepository
 import com.arghamnegargroup.core.features.item.data.repository.ItemRepositoryImpl
 import com.arghamnegargroup.core.features.item.domain.repository.ItemRepository
+import com.arghamnegargroup.core.features.licence.data.repository.LicenseRepositoryImpl
+import com.arghamnegargroup.core.features.licence.domain.repository.LicenseRepository
 import com.arghamnegargroup.core.features.quickitems.data.repository.QuickItemsRepositoryImpl
 import com.arghamnegargroup.core.features.quickitems.domain.repository.QuickItemsRepository
 import com.arghamnegargroup.core.features.section.data.repository.SectionRepositoryImpl
@@ -140,5 +142,14 @@ object RepositoryModule {
         connectionRepository: ConnectionRepository
     ): InvoiceRepository {
         return InvoiceRepositoryImpl(api, connectionRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideLicenseRepository(
+        api: BaranApi,
+        connectionRepository: ConnectionRepository
+    ): LicenseRepository {
+        return LicenseRepositoryImpl(api, connectionRepository)
     }
 }

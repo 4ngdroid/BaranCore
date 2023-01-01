@@ -32,6 +32,8 @@ import com.arghamnegargroup.core.features.item.data.remote.dto.response.ItemInfo
 import com.arghamnegargroup.core.features.item.data.remote.dto.response.SaveItemInfoResponse
 import com.arghamnegargroup.core.features.item.data.remote.dto.response.SearchResponse
 import com.arghamnegargroup.core.features.item.domain.model.ItemsResponse
+import com.arghamnegargroup.core.features.licence.data.dto.request.LicenseRequest
+import com.arghamnegargroup.core.features.licence.data.dto.response.LicenseResponse
 import com.arghamnegargroup.core.features.order.data.dto.request.ResumeSuspendOrderRequest
 import com.arghamnegargroup.core.features.order.data.dto.request.SuspendOrderRequest
 import com.arghamnegargroup.core.features.order.data.dto.response.ResumeSuspendOrderResponse
@@ -148,5 +150,8 @@ interface BaranApi {
 
     @POST
     suspend fun getReasons(@Url url: String, @Body request: ReasonsRequest): ReasonResponse
+
+    @POST
+    suspend fun validateLicense(@Url url: String, @Body request: LicenseRequest): LicenseResponse
 
 }

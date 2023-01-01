@@ -1,6 +1,6 @@
 package com.arghamnegargroup.core.features.core.data.remote
 
-object Endpoints {
+internal object Endpoints {
     const val GET_DOCUMENT_INFO = "GetDocumentInfo"
     const val GET_ALL_STOCKS = "GetAllStock"
     const val GET_ALL_SUPPLIERS = "GetSuppliers"
@@ -32,6 +32,7 @@ object Endpoints {
     const val USE_CUSTOMER_CREDIT = "UseCustomerCredit"
     const val USE_REMAIN_CREDIT = "UseRemainCredit"
     const val GET_REASONS = "GetReasons"
+    const val VALIDATE_LICENSE = "ValidateLicense"
 
 
 }

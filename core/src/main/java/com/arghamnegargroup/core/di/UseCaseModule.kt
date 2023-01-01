@@ -15,6 +15,8 @@ import com.arghamnegargroup.core.features.invoice.domain.repository.InvoiceRepos
 import com.arghamnegargroup.core.features.invoice.domain.usecase.*
 import com.arghamnegargroup.core.features.item.domain.repository.ItemRepository
 import com.arghamnegargroup.core.features.item.domain.usecase.*
+import com.arghamnegargroup.core.features.licence.domain.repository.LicenseRepository
+import com.arghamnegargroup.core.features.licence.domain.usecase.ValidateLicense
 import com.arghamnegargroup.core.features.order.domain.repository.OrderRepository
 import com.arghamnegargroup.core.features.order.domain.usecase.GetSuspendOrders
 import com.arghamnegargroup.core.features.order.domain.usecase.OrderUseCase
@@ -218,5 +220,13 @@ object UseCaseModule {
         tableRepository: TableRepository,
     ): GetTables {
         return GetTables(tableRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideLicenseUseCase(
+        licenseRepository: LicenseRepository
+    ): ValidateLicense {
+        return ValidateLicense(licenseRepository)
     }
 }
