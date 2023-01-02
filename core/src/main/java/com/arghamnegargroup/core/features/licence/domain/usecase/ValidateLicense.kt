@@ -14,6 +14,7 @@ class ValidateLicense(
 
     @SuppressLint("HardwareIds")
     suspend operator fun invoke(context: Context): Boolean? {
+        Log.i(TAG, "ValidateLicenseUseCase performed!")
         val secureId =
             Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
 
