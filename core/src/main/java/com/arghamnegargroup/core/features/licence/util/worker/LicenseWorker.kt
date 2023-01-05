@@ -23,11 +23,11 @@ class LicenseWorker @AssistedInject constructor(
     override suspend fun doWork(): Result {
         val valid = validateLicense(appContext)
         Log.i(TAG, "LicenseWorker: isValid? $valid")
-//        if (valid == false) {
-            val intent =  Intent(appContext, LicenseActivity::class.java)
+        if (valid == false) {
+            val intent = Intent(appContext, LicenseActivity::class.java)
             intent.flags = FLAG_ACTIVITY_NEW_TASK;
             appContext.startActivity(intent);
-//        }
+        }
         return Result.success()
     }
 
