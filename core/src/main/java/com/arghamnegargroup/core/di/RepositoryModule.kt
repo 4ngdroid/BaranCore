@@ -7,6 +7,8 @@ import com.arghamnegargroup.core.features.connectivity.data.repository.Connectio
 import com.arghamnegargroup.core.features.connectivity.domain.repository.ConnectionRepository
 import com.arghamnegargroup.core.features.core.data.datasource.BaranDatabase
 import com.arghamnegargroup.core.features.core.data.remote.BaranApi
+import com.arghamnegargroup.core.features.customer.data.repository.CustomerRepositoryImpl
+import com.arghamnegargroup.core.features.customer.domain.repository.CustomerRepository
 import com.arghamnegargroup.core.features.dictionary.data.repository.DictionaryRepositoryImpl
 import com.arghamnegargroup.core.features.dictionary.domain.repository.DictionaryRepository
 import com.arghamnegargroup.core.features.document.data.repository.DocumentRepositoryImpl
@@ -151,5 +153,14 @@ object RepositoryModule {
         connectionRepository: ConnectionRepository
     ): LicenseRepository {
         return LicenseRepositoryImpl(api, connectionRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCustomerRepository(
+        api: BaranApi,
+        connectionRepository: ConnectionRepository
+    ): CustomerRepository {
+        return CustomerRepositoryImpl(api, connectionRepository)
     }
 }
