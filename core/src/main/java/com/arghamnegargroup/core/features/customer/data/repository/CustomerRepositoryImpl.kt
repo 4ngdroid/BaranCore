@@ -10,6 +10,8 @@ import com.arghamnegargroup.core.features.customer.data.dto.request.SaveCustomer
 import com.arghamnegargroup.core.features.customer.data.dto.request.UseCreditRequest
 import com.arghamnegargroup.core.features.customer.domain.model.Credit
 import com.arghamnegargroup.core.features.customer.domain.model.Customer
+import com.arghamnegargroup.core.features.customer.domain.model.CustomerExists
+import com.arghamnegargroup.core.features.customer.domain.model.NoSuchCustomerFound
 import com.arghamnegargroup.core.features.customer.domain.repository.CustomerRepository
 import kotlin.Exception
 
@@ -19,13 +21,15 @@ class CustomerRepositoryImpl(
 ) : CustomerRepository {
 
     override suspend fun getCustomer(request: CustomerRequest): Customer? {
-        return api.getCustomer(connectionRepository.getUrl(Endpoints.GET_CUSTOMER_BY_CODE), request).getCustomer()
+        return api.getCustomer(connectionRepository.getUrl(Endpoints.GET_CUSTOMER_BY_CODE), request)
+            .getCustomer()
+            ?: throw NoSuchCustomerFound()
     }
 
     override suspend fun saveCustomer(request: SaveCustomerRequest): String? {
         val id = api.saveCustomer(connectionRepository.getUrl(Endpoints.SAVE_CUSTOMER), request).result
         if (id == "00000000-0000-0000-0000-000000000000")
-            throw Exception("مشتری یافت نشد.")
+            throw CustomerExists()
         return id
     }
 

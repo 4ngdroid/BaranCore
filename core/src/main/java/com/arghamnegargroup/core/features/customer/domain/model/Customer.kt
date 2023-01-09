@@ -68,6 +68,7 @@ data class Customer(
     @SerializedName("Area")
     val area: String? = null,
 ) : Parcelable {
+
     fun getFullName(): String {
         var fullName = ""
         if (firstName != null && lastName != null)
@@ -95,4 +96,10 @@ data class Customer(
                 country = country, state = state, city = city, area = area, address = address
             )
 
+    constructor(code: String, firstName: String?, lastName: String?) :
+            this(firstName = firstName, lastName = lastName, mobile = code, customerCode = code)
+
 }
+
+class NoSuchCustomerFound : Exception("مشتری یافت نشد.")
+class CustomerExists : Exception("مشتری با اطلاعات فعلی موجود است.")
