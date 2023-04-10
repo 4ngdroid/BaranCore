@@ -33,6 +33,8 @@ internal object Endpoints {
     const val USE_REMAIN_CREDIT = "UseRemainCredit"
     const val GET_REASONS = "GetReasons"
     const val VALIDATE_LICENSE = "ValidateLicense"
-
+    const val GET_ITEM_STOCKS = "GetItemStocks"
+    const val CHANGE_ITEM_STOCKS = "ChangeItemStocks"
+    const val GET_SUPPLIER_ORDERS_FOR_RECEIVE = "GetSupplierOrdersForRecieve"
 
 }

@@ -13,4 +13,5 @@ data class DocumentUseCase(
     val deleteDocument: DeleteDocument,
     val setStatus: SetStatus,
     val getLastDocument: GetLastDocument,
+    val getSupplierOrders: GetSupplierOrders,
 )

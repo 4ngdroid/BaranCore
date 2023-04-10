@@ -72,4 +72,8 @@ class ConnectionRepositoryImpl(
             Base64.NO_WRAP
         )
     }
+
+    override fun isSettingEmpty(): Boolean {
+        return getIP().isEmpty() || getPort().isEmpty() || getUsername().isEmpty() || getPassword().isEmpty()
+    }
 }

@@ -2,6 +2,7 @@ package com.arghamnegargroup.core.features.core.data.remote
 
 import com.arghamnegargroup.core.features.auth.data.remote.dto.request.LoginRequest
 import com.arghamnegargroup.core.features.auth.data.remote.dto.response.LoginResponse
+import com.arghamnegargroup.core.features.core.util.common.ConvertToLatin
 import com.arghamnegargroup.core.features.customer.data.dto.request.CustomerCreditRequest
 import com.arghamnegargroup.core.features.customer.data.dto.request.CustomerRequest
 import com.arghamnegargroup.core.features.customer.data.dto.request.SaveCustomerRequest
@@ -14,9 +15,11 @@ import com.arghamnegargroup.core.features.dictionary.data.remote.request.Diction
 import com.arghamnegargroup.core.features.dictionary.data.remote.response.DictionaryResponse
 import com.arghamnegargroup.core.features.document.data.remote.dto.request.BookStockDocumentRequest
 import com.arghamnegargroup.core.features.document.data.remote.dto.request.DocumentInfoRequest
+import com.arghamnegargroup.core.features.document.data.remote.dto.request.GetSupplierOrdersRequest
 import com.arghamnegargroup.core.features.document.data.remote.dto.request.SaveBarcodeFileRequest
 import com.arghamnegargroup.core.features.document.data.remote.dto.response.BookDocumentResponse
 import com.arghamnegargroup.core.features.document.data.remote.dto.response.DocumentInfoResponse
+import com.arghamnegargroup.core.features.document.data.remote.dto.response.GetSupplierOrdersResponse
 import com.arghamnegargroup.core.features.invoice.data.remote.dto.request.CalcInvoiceRequest
 import com.arghamnegargroup.core.features.invoice.data.remote.dto.request.GetInvoiceRequest
 import com.arghamnegargroup.core.features.invoice.data.remote.dto.request.ReturnInvoiceRequest
@@ -32,6 +35,9 @@ import com.arghamnegargroup.core.features.item.data.remote.dto.response.ItemInfo
 import com.arghamnegargroup.core.features.item.data.remote.dto.response.SaveItemInfoResponse
 import com.arghamnegargroup.core.features.item.data.remote.dto.response.SearchResponse
 import com.arghamnegargroup.core.features.item.domain.model.ItemsResponse
+import com.arghamnegargroup.core.features.item_stock.data.dto.request.ChangeItemStocksRequest
+import com.arghamnegargroup.core.features.item_stock.data.dto.request.ItemStocksRequest
+import com.arghamnegargroup.core.features.item_stock.data.dto.response.ItemStocksResponse
 import com.arghamnegargroup.core.features.licence.data.dto.request.LicenseRequest
 import com.arghamnegargroup.core.features.licence.data.dto.response.LicenseResponse
 import com.arghamnegargroup.core.features.order.data.dto.request.ResumeSuspendOrderRequest
@@ -63,12 +69,14 @@ interface BaranApi {
     suspend fun getStocks(@Url url: String): StockResponse
 
     @POST
+    @ConvertToLatin
     suspend fun getDocumentInfo(@Url url: String, @Body request: DocumentInfoRequest): DocumentInfoResponse
 
     @GET
     suspend fun getSuppliers(@Url url: String): SuppliersResponse
 
     @POST
+    @ConvertToLatin
     suspend fun getItemInfo(@Url url: String, @Body request: ItemInfoRequest): ItemInfoResponse
 
     @POST
@@ -91,7 +99,7 @@ interface BaranApi {
 
     @Streaming
     @GET
-    fun getItemBarcodes(@Url url: String): Response<ResponseBody>
+    suspend fun getItemBarcodes(@Url url: String): Response<ResponseBody>
 
     @POST
     suspend fun searchItem(@Url url: String, @Body request: SearchRequest): SearchResponse
@@ -100,6 +108,7 @@ interface BaranApi {
     suspend fun getDictionary(@Url url: String, @Body request: DictionaryRequest): DictionaryResponse
 
     @POST
+    @ConvertToLatin
     suspend fun saveItemInfo(@Url url: String, @Body request: SaveItemInfoRequest): SaveItemInfoResponse
 
     @POST
@@ -109,6 +118,7 @@ interface BaranApi {
     suspend fun getTables(@Url url: String): TableResponse
 
     @POST
+    @ConvertToLatin
     suspend fun getCustomer(@Url url: String, @Body request: CustomerRequest): CustomerResponse
 
     @POST
@@ -154,4 +164,12 @@ interface BaranApi {
     @POST
     suspend fun validateLicense(@Url url: String, @Body request: LicenseRequest): LicenseResponse
 
+    @POST
+    suspend fun getItemStocks(@Url url: String, @Body request: ItemStocksRequest): ItemStocksResponse
+
+    @POST
+    suspend fun changeItemStocks(@Url url: String, @Body request: ChangeItemStocksRequest)
+
+    @POST
+    suspend fun getSupplierOrders(@Url url: String, @Body request: GetSupplierOrdersRequest): GetSupplierOrdersResponse
 }

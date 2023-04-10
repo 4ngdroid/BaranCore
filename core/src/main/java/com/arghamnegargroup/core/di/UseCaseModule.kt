@@ -1,10 +1,12 @@
 package com.arghamnegargroup.core.di
 
+import android.content.Context
 import com.arghamnegargroup.core.features.auth.domain.repository.AuthRepository
-import com.arghamnegargroup.core.features.auth.domain.usecase.AuthUseCase
-import com.arghamnegargroup.core.features.auth.domain.usecase.GetUser
-import com.arghamnegargroup.core.features.auth.domain.usecase.Login
+import com.arghamnegargroup.core.features.auth.domain.usecase.*
+import com.arghamnegargroup.core.features.connectivity.domain.repository.ConnectionRepository
 import com.arghamnegargroup.core.features.connectivity.domain.usecase.Check
+import com.arghamnegargroup.core.features.connectivity.domain.usecase.ConnectionUseCase
+import com.arghamnegargroup.core.features.connectivity.domain.usecase.IsSettingEmpty
 import com.arghamnegargroup.core.features.customer.domain.repository.CustomerRepository
 import com.arghamnegargroup.core.features.customer.domain.usecase.*
 import com.arghamnegargroup.core.features.dictionary.domain.repository.DictionaryRepository
@@ -15,6 +17,10 @@ import com.arghamnegargroup.core.features.invoice.domain.repository.InvoiceRepos
 import com.arghamnegargroup.core.features.invoice.domain.usecase.*
 import com.arghamnegargroup.core.features.item.domain.repository.ItemRepository
 import com.arghamnegargroup.core.features.item.domain.usecase.*
+import com.arghamnegargroup.core.features.item_stock.domain.repository.ItemStocksRepository
+import com.arghamnegargroup.core.features.item_stock.domain.usecase.ChangeItemStocks
+import com.arghamnegargroup.core.features.item_stock.domain.usecase.GetItemStocks
+import com.arghamnegargroup.core.features.item_stock.domain.usecase.ItemStocksUseCase
 import com.arghamnegargroup.core.features.licence.domain.repository.LicenseRepository
 import com.arghamnegargroup.core.features.licence.domain.usecase.ValidateLicense
 import com.arghamnegargroup.core.features.order.domain.repository.OrderRepository
@@ -37,11 +43,13 @@ import com.arghamnegargroup.core.features.store.domain.repository.StoreRepositor
 import com.arghamnegargroup.core.features.store.domain.usecase.*
 import com.arghamnegargroup.core.features.supplier.domain.repository.SupplierRepository
 import com.arghamnegargroup.core.features.supplier.domain.usecase.GetSuppliers
+import com.arghamnegargroup.core.features.supplier.domain.usecase.SupplierUseCase
 import com.arghamnegargroup.core.features.table.domain.repository.TableRepository
 import com.arghamnegargroup.core.features.table.domain.usecase.GetTables
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -56,18 +64,27 @@ object UseCaseModule {
         stockRepository: StockRepository,
         storeRepository: StoreRepository,
         supplierRepository: SupplierRepository,
-    ): Check {
-        return Check(stockRepository, storeRepository, supplierRepository)
+        connectionRepository: ConnectionRepository,
+    ): ConnectionUseCase {
+        return ConnectionUseCase(
+            check = Check(stockRepository, storeRepository, supplierRepository),
+            isSettingEmpty = IsSettingEmpty(connectionRepository)
+        )
     }
 
     @Provides
     @Singleton
     fun provideAuthUseCase(
+        @ApplicationContext context: Context,
         authRepository: AuthRepository,
+        validateLicense: ValidateLicense
     ): AuthUseCase {
         return AuthUseCase(
-            login = Login(authRepository),
-            getUser = GetUser(authRepository)
+            login = Login(context, authRepository, validateLicense),
+            logout = Logout(authRepository),
+            getUser = GetUser(authRepository),
+            getUserId = GetUserId(authRepository),
+            getLastUsername = GetLastUsername(authRepository),
         )
     }
 
@@ -95,8 +112,10 @@ object UseCaseModule {
 
     @Provides
     @Singleton
-    fun provideSupplierUseCase(repository: SupplierRepository): GetSuppliers {
-        return GetSuppliers(repository)
+    fun provideSupplierUseCase(repository: SupplierRepository): SupplierUseCase {
+        return SupplierUseCase(
+            getSuppliers = GetSuppliers(repository)
+        )
     }
 
     @Provides
@@ -141,7 +160,8 @@ object UseCaseModule {
             setItems = SetItems(documentRepository),
             deleteDocument = DeleteDocument(documentRepository),
             setStatus = SetStatus(documentRepository),
-            getLastDocument = GetLastDocument(documentRepository)
+            getLastDocument = GetLastDocument(documentRepository),
+            getSupplierOrders = GetSupplierOrders(documentRepository)
         )
     }
 
@@ -225,8 +245,20 @@ object UseCaseModule {
     @Provides
     @Singleton
     fun provideLicenseUseCase(
+        @ApplicationContext context: Context,
         licenseRepository: LicenseRepository
     ): ValidateLicense {
-        return ValidateLicense(licenseRepository)
+        return ValidateLicense(context, licenseRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideItemStocksUseCase(
+        itemStocksRepository: ItemStocksRepository
+    ): ItemStocksUseCase {
+        return ItemStocksUseCase(
+            getItemStocks = GetItemStocks(itemStocksRepository),
+            changeItemStocks = ChangeItemStocks(itemStocksRepository)
+        )
     }
 }

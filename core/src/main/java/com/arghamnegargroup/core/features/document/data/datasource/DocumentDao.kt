@@ -12,7 +12,7 @@ import com.arghamnegargroup.core.features.item.domain.model.Item
 interface DocumentDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveDocument(document: Document)
+    suspend fun saveDocument(document: Document) : Long
 
     @Query("UPDATE document SET sourceStockID = :sourceStockId, sourceStock = :sourceStock WHERE id = :id")
     suspend fun setSourceStock(id: Int, sourceStockId: String?, sourceStock: String?)

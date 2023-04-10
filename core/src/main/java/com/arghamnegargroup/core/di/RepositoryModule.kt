@@ -1,5 +1,6 @@
 package com.arghamnegargroup.core.di
 
+import com.arghamnegargroup.core.features.auth.data.repository.AuthPreferences
 import com.arghamnegargroup.core.features.auth.data.repository.AuthRepositoryImpl
 import com.arghamnegargroup.core.features.auth.domain.repository.AuthRepository
 import com.arghamnegargroup.core.features.connectivity.data.pref.ConnectionPreferences
@@ -17,6 +18,9 @@ import com.arghamnegargroup.core.features.invoice.data.repository.InvoiceReposit
 import com.arghamnegargroup.core.features.invoice.domain.repository.InvoiceRepository
 import com.arghamnegargroup.core.features.item.data.repository.ItemRepositoryImpl
 import com.arghamnegargroup.core.features.item.domain.repository.ItemRepository
+import com.arghamnegargroup.core.features.item_stock.data.repository.ItemStocksRepositoryImpl
+import com.arghamnegargroup.core.features.item_stock.domain.repository.ItemStocksRepository
+import com.arghamnegargroup.core.features.licence.data.pref.LicensePreferences
 import com.arghamnegargroup.core.features.licence.data.repository.LicenseRepositoryImpl
 import com.arghamnegargroup.core.features.licence.domain.repository.LicenseRepository
 import com.arghamnegargroup.core.features.quickitems.data.repository.QuickItemsRepositoryImpl
@@ -52,9 +56,10 @@ object RepositoryModule {
     fun provideAuthRepository(
         api: BaranApi,
         db: BaranDatabase,
+        preferences: AuthPreferences,
         connectionRepository: ConnectionRepository,
     ): AuthRepository {
-        return AuthRepositoryImpl(db, api, connectionRepository)
+        return AuthRepositoryImpl(db, api, preferences, connectionRepository)
     }
 
     @Provides
@@ -150,9 +155,10 @@ object RepositoryModule {
     @Singleton
     fun provideLicenseRepository(
         api: BaranApi,
+        preferences: LicensePreferences,
         connectionRepository: ConnectionRepository
     ): LicenseRepository {
-        return LicenseRepositoryImpl(api, connectionRepository)
+        return LicenseRepositoryImpl(api, preferences, connectionRepository)
     }
 
     @Provides
@@ -162,5 +168,14 @@ object RepositoryModule {
         connectionRepository: ConnectionRepository
     ): CustomerRepository {
         return CustomerRepositoryImpl(api, connectionRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideItemStocksRepository(
+        api: BaranApi,
+        connectionRepository: ConnectionRepository
+    ): ItemStocksRepository {
+        return ItemStocksRepositoryImpl(api, connectionRepository)
     }
 }

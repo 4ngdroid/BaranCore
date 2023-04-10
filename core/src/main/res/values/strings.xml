@@ -1,3 +1,9 @@
 <resources>
     <string name="license_not_valid">تعداد کاربران وارد شده\n بیش از حد مجاز میباشد.</string>
+    <string name="search">جستجو</string>
+    <string name="close">بستن</string>
+    <string name="stocks">انبار ها</string>
+    <string name="error">خطا</string>
+    <string name="ok">باشه</string>
+    <string name="copied_to_clipboard">در کلیپبورد ذخیره شد.</string>
 </resources>

@@ -20,7 +20,7 @@ interface ItemRepository {
 
     suspend fun saveItemBarcodes(items: List<ItemBarcode>)
 
-    suspend fun getItemBarcode(barcode: String): ItemBarcode?
+    suspend fun getItemBarcode(barcode: String): Item
 
     suspend fun deleteItemBarcodes(): Int
 

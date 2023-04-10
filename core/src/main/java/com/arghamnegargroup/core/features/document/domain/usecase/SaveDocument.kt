@@ -7,12 +7,12 @@ class SaveDocument(
     private val repository: DocumentRepository,
 ) {
 
-    suspend operator fun invoke(document: Document?): Result<Unit> {
+    suspend operator fun invoke(document: Document?): Result<Long> {
         try {
             if (document == null)
                 return Result.failure(NullPointerException("سند فعلی الزامی است."))
-            repository.saveDocument(document)
-            return Result.success(Unit)
+            val id = repository.saveDocument(document)
+            return Result.success(id)
         } catch (e: Throwable) {
             return Result.failure(e)
         }

@@ -8,11 +8,11 @@ class GetDocumentInfo(
     private val repository: DocumentRepository,
 ) {
 
-    suspend operator fun invoke(documentCode: String?): Result<Document?> {
+    suspend operator fun invoke(documentCode: String?): Result<Document> {
         try {
             if (documentCode == null)
                 return Result.failure(NullPointerException("کد سند الزامی میباشد."))
-            val document = repository.getDocumentInfo(DocumentInfoRequest(documentCode))
+            val document = repository.getDocumentInfo(DocumentInfoRequest(documentCode)) ?: throw NullPointerException("سند یافت نشد.")
             return Result.success(document)
         } catch (e: Throwable) {
             return Result.failure(e)

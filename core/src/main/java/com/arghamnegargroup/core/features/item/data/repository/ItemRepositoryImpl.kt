@@ -49,11 +49,26 @@ class ItemRepositoryImpl(
     }
 
     override suspend fun saveItemBarcodes(items: List<ItemBarcode>) {
+        db.itemBarcodeDao().deleteItemBarcodes()
         return db.itemBarcodeDao().saveItemBarcodes(items)
     }
 
-    override suspend fun getItemBarcode(barcode: String): ItemBarcode? {
-        return db.itemBarcodeDao().getItemBarcode(barcode)
+    override suspend fun getItemBarcode(barcode: String): Item {
+        val item = db.itemBarcodeDao().getItemBarcode(barcode)
+        return if (item != null) {
+            Item(
+                barcode = item.barcode,
+                itemId = item.barcode ?: "",
+                name = item.name ?: item.barcode,
+            )
+        } else {
+            Item(
+                barcode = barcode,
+                itemId = barcode,
+                name = barcode,
+            )
+        }
+
     }
 
     override suspend fun deleteItemBarcodes(): Int {

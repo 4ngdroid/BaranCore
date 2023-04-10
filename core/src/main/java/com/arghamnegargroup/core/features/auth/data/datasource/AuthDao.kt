@@ -14,4 +14,7 @@ interface AuthDao {
 
     @Query("SELECT * FROM user")
     suspend fun getUsers(): List<User>
+
+    @Query("DELETE FROM user")
+    suspend fun deleteUsers()
 }

@@ -7,6 +7,7 @@ import com.arghamnegargroup.core.features.core.data.remote.Endpoints
 import com.arghamnegargroup.core.features.core.util.ext.isSuccessful
 import com.arghamnegargroup.core.features.document.data.remote.dto.request.BookStockDocumentRequest
 import com.arghamnegargroup.core.features.document.data.remote.dto.request.DocumentInfoRequest
+import com.arghamnegargroup.core.features.document.data.remote.dto.request.GetSupplierOrdersRequest
 import com.arghamnegargroup.core.features.document.data.remote.dto.request.SaveBarcodeFileRequest
 import com.arghamnegargroup.core.features.document.domain.model.Document
 import com.arghamnegargroup.core.features.document.domain.model.Status
@@ -42,7 +43,7 @@ class DocumentRepositoryImpl(
         } else Result.failure(Exception("سند ذخیره نشد."))
     }
 
-    override suspend fun saveDocument(document: Document) {
+    override suspend fun saveDocument(document: Document): Long {
         return db.documentDao().saveDocument(document)
     }
 
@@ -76,5 +77,9 @@ class DocumentRepositoryImpl(
 
     override suspend fun getLastDocument(): Document? {
         return db.documentDao().getLastDocument()
+    }
+
+    override suspend fun getSupplierOrders(request: GetSupplierOrdersRequest): List<Document> {
+        return api.getSupplierOrders(connectionRepository.getUrl(Endpoints.GET_SUPPLIER_ORDERS_FOR_RECEIVE), request).documents ?: emptyList()
     }
 }

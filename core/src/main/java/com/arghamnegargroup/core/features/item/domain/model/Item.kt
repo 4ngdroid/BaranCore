@@ -2,6 +2,7 @@ package com.arghamnegargroup.core.features.item.domain.model
 
 import android.os.Parcelable
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.arghamnegargroup.core.features.order.domain.model.OrderItem
 import com.google.gson.annotations.SerializedName
@@ -12,11 +13,11 @@ import java.util.UUID
 @Entity
 data class Item(
     @SerializedName("AllowToRecieve")
-    var allowToReceive: Boolean? = null,
+    var allowToReceive: Boolean = false,
     @SerializedName("Attributes")
     var attributes: List<Attribute>? = null,
     @SerializedName("BonusCount")
-    var bonusCount: Double? = null,
+    var bonusCount: Double = 0.0,
     @SerializedName("Barcode")
     var barcode: String? = null,
     @SerializedName("Brand")
@@ -95,9 +96,9 @@ data class Item(
     @SerializedName("NetCost")
     var netCost: Double? = null,
     @SerializedName("OrderCount")
-    var orderCount: Double? = null,
+    var orderCount: Double = 0.0,
     @SerializedName("PackCount")
-    var packCount: Double? = null,
+    var packCount: Double = 0.0,
     @SerializedName("PackNumber")
     var packNumber: Double? = null,
     @SerializedName("PackUnitCount")
@@ -107,19 +108,19 @@ data class Item(
     @SerializedName("PositiveCost")
     var positiveCost: Double? = null,
     @SerializedName("Price")
-    var price: Double? = null,
+    var price: Double = 0.0,
     @SerializedName("PriceWithTax")
-    var priceWithTax: Double? = null,
+    var priceWithTax: Double = 0.0,
     @SerializedName("Quantity")
-    var quantity: Double? = null,
+    var quantity: Double = 0.0,
     @SerializedName("RecieveMoreThanOrder")
-    var receiveMoreThanOrder: Boolean? = null,
+    var receiveMoreThanOrder: Boolean = false,
     @SerializedName("ScannedCount")
-    var scannedCount: Double? = null,
+    var scannedCount: Double = 0.0,
     @SerializedName("Status")
-    var status: Boolean? = null,
+    var status: Boolean = false,
     @SerializedName("StockQuantity")
-    var stockQuantity: Double? = null,
+    var stockQuantity: Double = 0.0,
     @SerializedName("StockSection")
     var stockSection: String? = null,
     @SerializedName("SKU")
@@ -141,7 +142,19 @@ data class Item(
 
     @Transient
     var orderItem: Boolean? = null,
-) : Parcelable
+) : Parcelable {
+
+    @Ignore
+    constructor(barcode: String? = null, itemId: String, name: String?) : this(
+        barcode = barcode, bonusCount = 0.0, bulkPrice = 0.0, contractConsumerPrice = null,
+        consumerPrice = 0.0, contractID = null, contractTypeId = null, cost = null, currentDiscount = 0.0,
+        damagedCount = null, departmentId = null, departmentName = null, description = null, notFound = null, notInOrder = null,
+        itemId = itemId, lineItemId = null, maximumOrderOverage = null, name = name, orderCount = 0.0, packCount = 0.0,
+        packNumber = null, packUnitCount = null, parentId = null, price = 0.0, quantity = 0.0, receiveMoreThanOrder = false,
+        scannedCount = 0.0, stockQuantity = 0.0, stockSection = null, supplierDiscountPercent = null, temporaryPrice = null,
+        typeId = null, unitOfMeasureId = null, priceWithTax = 0.0,
+    )
+}
 
 fun Item.toOrderItem(): OrderItem {
     return OrderItem(

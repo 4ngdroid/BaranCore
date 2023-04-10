@@ -23,4 +23,7 @@ interface ConnectionRepository {
     fun getUrl(): String
     fun getUrl(endpoint: String): String
     fun getCredentials(): String
+
+    fun isSettingEmpty(): Boolean
+
 }

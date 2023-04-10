@@ -1,14 +1,24 @@
 package com.arghamnegargroup.core.features.core.util.ext
 
-fun String?.toLatinDigits(): String? {
-    return this?.replace('٠', '0')
-        ?.replace('١', '1')
-        ?.replace('٢', '2')
-        ?.replace('٣', '3')
-        ?.replace('٤', '4')
-        ?.replace('٥', '5')
-        ?.replace('٦', '6')
-        ?.replace('٧', '7')
-        ?.replace('٨', '8')
-        ?.replace('٩', '9')
+fun String?.toLatinDigits(): String {
+    if (this == null) return ""
+    var result = ""
+    var en = '0'
+    for (ch in this) {
+        en = ch
+        when (ch) {
+            '۰' -> en = '0'
+            '۱' -> en = '1'
+            '۲' -> en = '2'
+            '۳' -> en = '3'
+            '۴' -> en = '4'
+            '۵' -> en = '5'
+            '۶' -> en = '6'
+            '۷' -> en = '7'
+            '۸' -> en = '8'
+            '۹' -> en = '9'
+        }
+        result = "${result}$en"
+    }
+    return result
 }

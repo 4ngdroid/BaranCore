@@ -17,7 +17,7 @@ class LicenseValidatorInitializer : Initializer<Unit> {
     override fun create(context: Context) {
         Log.i(TAG, "LicenseValidatorInitializer: ${context.packageName}")
         val request = PeriodicWorkRequestBuilder<LicenseWorker>(
-            MIN_PERIODIC_INTERVAL_MILLIS, TimeUnit.MILLISECONDS
+            1, TimeUnit.DAYS
         ).build()
         WorkManager.getInstance(context)
             .enqueueUniquePeriodicWork("LicenseWorker", ExistingPeriodicWorkPolicy.REPLACE, request)

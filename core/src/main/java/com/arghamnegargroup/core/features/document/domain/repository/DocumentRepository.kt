@@ -3,6 +3,7 @@ package com.arghamnegargroup.core.features.document.domain.repository
 import androidx.room.Query
 import com.arghamnegargroup.core.features.document.data.remote.dto.request.BookStockDocumentRequest
 import com.arghamnegargroup.core.features.document.data.remote.dto.request.DocumentInfoRequest
+import com.arghamnegargroup.core.features.document.data.remote.dto.request.GetSupplierOrdersRequest
 import com.arghamnegargroup.core.features.document.data.remote.dto.request.SaveBarcodeFileRequest
 import com.arghamnegargroup.core.features.document.domain.model.Document
 import com.arghamnegargroup.core.features.document.domain.model.Status
@@ -19,7 +20,7 @@ interface DocumentRepository {
 
     suspend fun saveBarcodeFile(request: SaveBarcodeFileRequest): Result<Unit>
 
-    suspend fun saveDocument(document: Document)
+    suspend fun saveDocument(document: Document): Long
 
     suspend fun setSourceStock(id: Int, sourceStock: Stock?)
 
@@ -36,4 +37,6 @@ interface DocumentRepository {
     suspend fun setStatus(id: Int, status: Status)
 
     suspend fun getLastDocument(): Document?
+
+    suspend fun getSupplierOrders(request: GetSupplierOrdersRequest): List<Document>
 }

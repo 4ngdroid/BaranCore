@@ -12,6 +12,7 @@ import com.arghamnegargroup.core.features.core.data.remote.BaranApi
 import com.arghamnegargroup.core.features.core.data.remote.NetworkConstants
 import com.arghamnegargroup.core.features.core.data.remote.NetworkHelper
 import com.arghamnegargroup.core.features.core.data.remote.interceptor.BasicAuthInterceptor
+import com.arghamnegargroup.core.features.core.data.remote.interceptor.LatinDigitInterceptor
 import com.arghamnegargroup.core.features.core.util.common.CoreConstants.TAG
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -49,6 +50,7 @@ object CoreModule {
             .writeTimeout(NetworkConstants.TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(NetworkConstants.TIMEOUT, TimeUnit.SECONDS)
         httpClient.addInterceptor(BasicAuthInterceptor(connectionRepository))
+        httpClient.addInterceptor(LatinDigitInterceptor())
         httpClient.addInterceptor(
             HttpLoggingInterceptor()
                 .apply {
